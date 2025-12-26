@@ -1,0 +1,51 @@
+services:
+  - type: web
+    name: gsphere-app
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      # Database configuration - Update these with your external MySQL database
+      # For external MySQL services (PlanetScale, Railway, Aiven, etc.)
+      - key: DB_HOST
+        sync: false
+      - key: DB_USER
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      - key: DB_NAME
+        sync: false
+      - key: DB_PORT
+        value: 3306  # MySQL default port
+      # Database SSL (set to true for cloud databases)
+      - key: DB_SSL
+        value: true  # Required for most external MySQL services
+      # JWT Secret - Generate a strong random string
+      - key: JWT_SECRET
+        sync: false
+      # Email configuration
+      - key: EMAIL_HOST
+        value: smtp.gmail.com
+      - key: EMAIL_PORT
+        value: 587
+      - key: EMAIL_USER
+        sync: false
+      - key: EMAIL_PASS
+        sync: false
+      # TAC Test Mode (set to false in production)
+      - key: TAC_TEST_MODE
+        value: false
+
+# Note: Render.com free tier doesn't include MySQL databases
+# You'll need to use an external MySQL service like:
+# - PlanetScale (free tier available)
+# - Railway (free tier available)
+# - Aiven (free tier available)
+# - AWS RDS (paid)
+# - Google Cloud SQL (paid)
+
